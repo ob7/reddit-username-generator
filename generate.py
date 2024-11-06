@@ -52,30 +52,6 @@ class RateLimiter:
         
         self.request_times.append(now)
 
-# def check_username(username, rate_limiter, session):
-#     """Check if a username is available on Reddit"""
-#     url = f"https://www.reddit.com/user/{username}"
-#     headers = {
-#         'User-Agent': 'Python/RequestsScript 1.0 (by u/YourRedditUsername) - Checking username availability',
-#     }
-    
-#     rate_limiter.wait_if_needed()
-    
-#     try:
-#         response = session.get(url, headers=headers, timeout=10)
-#         print(f"{datetime.now().strftime('%H:%M:%S')} - Checked {username} - Status: {response.status_code}")
-        
-#         if response.status_code == 404:
-#             return True
-            
-#         return "Sorry, nobody on Reddit goes by that name" in response.text
-    
-#     except Exception as e:
-#         print(f"Error checking {username}: {e}")
-#         time.sleep(30)
-#         return False
-
-
 def check_username(username, rate_limiter, session):
     """Check if a username is available on Reddit"""
     url = f"https://www.reddit.com/user/{username}"
@@ -103,58 +79,6 @@ def check_username(username, rate_limiter, session):
         time.sleep(30)
         return False
 
-
-# def find_available_usernames(max_checks=None):
-#     """Generate and check username combinations with rate limiting"""
-#     available_usernames = []
-#     rate_limiter = RateLimiter(requests_per_minute=REQUESTS_PER_MINUTE)
-#     session = requests.Session()
-    
-#     total_combinations = TOTAL_POSSIBILITIES
-#     if max_checks:
-#         total_combinations = min(total_combinations, max_checks)
-    
-#     # Calculate estimated time
-#     estimated_minutes = total_combinations / REQUESTS_PER_MINUTE
-#     print(f"Starting search at {datetime.now().strftime('%H:%M:%S')}")
-#     print(f"Checking up to {total_combinations:,} usernames...")
-#     print(f"Estimated time: {estimated_minutes:.1f} minutes ({estimated_minutes/60:.1f} hours)")
-    
-#     checked = 0
-#     start_time = time.time()
-    
-#     try:
-#         for combo in product(CHARACTERS, repeat=USERNAME_LENGTH):
-#             username = ''.join(combo)
-#             checked += 1
-            
-#             if check_username(username, rate_limiter, session):
-#                 print(f"\nFound available username: {username}")
-#                 available_usernames.append(username)
-                
-#                 # Save results immediately
-#                 with open(f'available_usernames_{USERNAME_LENGTH}char.txt', 'a') as f:
-#                     f.write(f"{username}\n")
-            
-#             # Print progress every 10 checks
-#             if checked % 10 == 0:
-#                 elapsed_time = time.time() - start_time
-#                 rate = checked / elapsed_time if elapsed_time > 0 else 0
-#                 time_remaining = (total_combinations - checked) / (rate if rate > 0 else 1)
-#                 print(f"\nProgress: {checked:,}/{total_combinations:,} "
-#                       f"({(checked/total_combinations)*100:.1f}%) "
-#                       f"Rate: {rate:.1f} checks/second")
-#                 print(f"Estimated time remaining: {time_remaining/60:.1f} hours")
-            
-#             if max_checks and checked >= max_checks:
-#                 break
-                
-#     except KeyboardInterrupt:
-#         print("\nSearch interrupted by user")
-#     finally:
-#         session.close()
-    
-#     return available_usernames
 
 def find_available_usernames(max_checks=None):
     """Generate and check username combinations with rate limiting"""
