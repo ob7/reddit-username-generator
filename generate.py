@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from collections import deque
 
 # Configuration
-USERNAME_LENGTH = 40  # Change this to check different lengths (3, 4, 5, etc.)
+USERNAME_LENGTH = 3  # Change this to check different lengths (3, 4, 5, etc.)
 CHARACTERS = string.ascii_lowercase + string.digits  # 26 letters + 10 digits = 36 characters
 REQUESTS_PER_MINUTE = 30  # Conservative rate limit
 ARIA_LABEL_OCCURRENCE = 1
