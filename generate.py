@@ -88,7 +88,7 @@ def check_username(username, rate_limiter, session):
 
         target_index = ARIA_LABEL_OCCURRENCE - 1  # Convert to zero-based index
         if len(articles) > target_index:
-            aria_label = articles[target_index]['aria-label']
+            aria_label = "POST: " + articles[target_index]['aria-label']
             # print(f"{ARIA_LABEL_OCCURRENCE}th <article> 'aria-label' content: {aria_label}", flush=True)
         else:
             # aria_label = f"No {ARIA_LABEL_OCCURRENCE}th <article> with aria-label found"
